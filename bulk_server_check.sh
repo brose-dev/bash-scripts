@@ -23,8 +23,12 @@ while IFS= read -r host; do
 		continue
 	fi
 
-	if ping -c 1 -W 2 "$host" > /dev/null 2>&1; then
-		echo "REACHABLE: $host"
+	if ping -c 1 -W 1 "$host" > /dev/null 2>&1; then
+		echo "REACHABLE: $host (ping)"
+	elif nc -z -w 1 "$host" 22 > /dev/null 2>&1; then
+		echo "REACHABLE: $host (port 22 - Linux)"
+	elif nc -z -w 1 "$host" 3389 > /dev/null 2>&1; then
+		echo "REACHABLE: $host (port 3389 - Windows)"
 	else
 		echo "UNREACHABLE: $host"
 	fi
