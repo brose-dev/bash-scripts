@@ -4,7 +4,7 @@
 
 LOG_FILE="$1"
 
-if [ -z "$LOG_FILE"]; then
+if [ -z "$LOG_FILE" ]; then
 	echo "Please provide a kog file"
 	echo "Usage:  ./log_parser.sh /path/to/file.log"
 	exit 1
